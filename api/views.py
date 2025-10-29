@@ -2,13 +2,14 @@ from django.shortcuts import render, get_object_or_404
 from django.http import JsonResponse
 from students.models import Student
 from .serializers import StudentSerializer, EmployeeSerializer
+from Blogs.serializers import BlogSerializer,CommentSerializer
 from rest_framework.response import Response
 from rest_framework import status,mixins,generics, viewsets
 from rest_framework.decorators import api_view
 from rest_framework.views import APIView
 from employees.models import Employee
 from django.http import Http404
-
+from Blogs.models import Blog,Comment
 
 @api_view(['GET','POST'])
 def StudentView(request):
@@ -165,3 +166,12 @@ class EmployeesViewset(viewsets.ViewSet):
 class EmployeesViewset(viewsets.ModelViewSet):
     queryset = Employee.objects.all()
     serializer_class = EmployeeSerializer
+
+class BlogView(generics.ListCreateAPIView):
+    queryset = Blog.objects.all()
+    serializer_class = BlogSerializer
+
+
+class CommentView(generics.ListCreateAPIView):
+    queryset = Comment.objects.all()
+    serializer_class = CommentSerializer
