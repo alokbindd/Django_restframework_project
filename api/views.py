@@ -10,6 +10,7 @@ from rest_framework.views import APIView
 from employees.models import Employee
 from django.http import Http404
 from Blogs.models import Blog,Comment
+from .paginations import CustomPagination
 
 @api_view(['GET','POST'])
 def StudentView(request):
@@ -164,8 +165,10 @@ class EmployeesViewset(viewsets.ViewSet):
 '''
 
 class EmployeesViewset(viewsets.ModelViewSet):
-    queryset = Employee.objects.all()
+    queryset = Employee.objects.all().order_by('emp_id')
     serializer_class = EmployeeSerializer
+    pagination_class = CustomPagination
+    filterset_fields = ['Designation']
 
 class BlogView(generics.ListCreateAPIView):
     queryset = Blog.objects.all()
@@ -175,3 +178,13 @@ class BlogView(generics.ListCreateAPIView):
 class CommentView(generics.ListCreateAPIView):
     queryset = Comment.objects.all()
     serializer_class = CommentSerializer
+
+class BlogDetailView(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Blog.objects.all()
+    serializer_class = BlogSerializer
+    lookup_field = 'pk'
+
+class CommentDetailView(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Comment.objects.all()
+    serializer_class = CommentSerializer
+    lookup_field = 'pk'
