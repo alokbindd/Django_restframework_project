@@ -8,7 +8,7 @@ This project demonstrates various Django REST Framework concepts and patterns le
 
 ## 🛠️ Technologies Used
 
-- **Python** 3.x
+- **Python** 3.14.0
 - **Django** 5.2.7
 - **Django REST Framework** 3.16.1
 - **django-filter** (for advanced filtering)
@@ -18,7 +18,7 @@ This project demonstrates various Django REST Framework concepts and patterns le
 
 ### Prerequisites
 
-- Python 3.x installed on your system
+- Python 3.14.0 installed on your system
 - pip (Python package manager)
 
 ### Setup Instructions
