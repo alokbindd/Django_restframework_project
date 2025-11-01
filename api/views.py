@@ -12,6 +12,7 @@ from django.http import Http404
 from Blogs.models import Blog,Comment
 from .paginations import CustomPagination
 from employees.filters import EmployeeFilter
+from rest_framework.filters import SearchFilter,OrderingFilter
 
 @api_view(['GET','POST'])
 def StudentView(request):
@@ -175,6 +176,9 @@ class EmployeesViewset(viewsets.ModelViewSet):
 class BlogView(generics.ListCreateAPIView):
     queryset = Blog.objects.all()
     serializer_class = BlogSerializer
+    filter_backends = [SearchFilter,OrderingFilter]
+    search_fields = ['blog_title','blog_body']
+    ordering_fields = ['id']
 
 
 class CommentView(generics.ListCreateAPIView):
